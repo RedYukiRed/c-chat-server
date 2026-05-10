@@ -1,4 +1,4 @@
-#include "../include/socket_utils.h"
+#include "../include/common/socket_utils.h"
 
 // Make tcp socket
 int create_server_socket(int port){
@@ -49,4 +49,34 @@ int accept_client(int server_fd){
 	
 	printf("Client Connected\n");
 	return client_fd;
+}
+
+int connect_to_server(const char *ip, int port){
+
+	//create a socket
+	int sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock < 0){
+		perror("Socket creation filed!");
+		return -1;
+
+	}
+
+	struct sockaddr_in server_addr;
+	memset(&server_addr, 0, sizeof(server_addr));
+	server_addr.sin_family = AF_INET;
+	server_addr.sin_port = htons(port);
+
+	if (inet_pton(AF_INET, ip, &server_addr.sin_addr) <= 0){
+		perror("Invalid afress or addre not supported!\n");
+		close(sock);
+		return -1;
+	}
+
+	if (connect(sock, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0){
+		perror("Connection faild!\n");
+		close(sock);
+		return -1;
+	}
+	printf("Connected to server %s:%d\n", ip , port);
+	return sock;
 }

@@ -1,7 +1,6 @@
-#include "../include/chat_server.h"
+#include "server/chat_server.h"
 #include <sys/select.h>
-#include <unistd.h>
-#include <string.h>
+
 
 int start_chat(int client_1, int client_2) {
     char name_1[32] = {0};

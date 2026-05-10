@@ -1,3 +1,6 @@
+#ifndef SOCKET_UTILS_H
+#define SOCKET_UTILS_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,3 +14,7 @@ int create_server_socket(int port);
 void setup_address(struct sockaddr_in* addr, int port);
 
 int accept_client(int server_fd);
+
+int connect_to_server(const char *ip, int port);
+
+#endif

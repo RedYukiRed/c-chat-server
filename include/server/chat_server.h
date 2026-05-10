@@ -1,12 +1,12 @@
-#include <stdio.h>
-#include <sys/select.h>
-#include <sys/socket.h>
-#include <unistd.h>
-
 #ifndef CHAT_SERVER_H
 #define CHAT_SERVER_H
 
-int start_chat(int clinet_1, int clinet_2);
+#include <stdio.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <sys/select.h>
 
+int start_chat(int client_1, int client_2);
 
 #endif
