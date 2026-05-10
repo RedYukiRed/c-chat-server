@@ -1,64 +1,61 @@
+```markdown
 # C Chat Server
 
-A simple two-person chat server implemented in C using TCP sockets and the `select()` system call.
+A simple two-person chat application in C using TCP sockets. Built as a learning project for C programming and network sockets.
+
+> **Note:** This is a learning project. Some parts were developed with AI assistance.
 
 ## Features
 
-- Real-time chat between two users.
-- Users choose their names upon connecting.
-- Messages are displayed with sender's name (e.g., `User: Message`).
-- Graceful handling of client disconnections.
+- Real-time chat between two users
+- Custom usernames
+- Messages prefixed with sender's name
+- Dedicated client application (no telnet needed)
 
-## Setup & Build
+## Build & Run
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/RedYukiRed/c-chat-server.git
-    cd c-chat-server
-    ```
-
-2.  **Build the server:**
-    Ensure you have GCC and Make installed.
-    ```bash
-    make
-    ```
-    This command will create a `build/` directory and compile the project into an executable file named `Chat` inside it.
+```bash
+git clone https://github.com/RedYukiRed/c-chat-server.git
+cd c-chat-server
+make
+```
 
 ## Usage
 
-1.  **Start the server:**
-    Run the executable from the `build` directory:
-    ```bash
-    ./build/Chat
-    ```
-    The server will start listening on port `9001` by default.
+**1. Start the server (Terminal 1):**
+```bash
+./build/server/chat_server
+```
 
-2.  **Connect two clients:**
-    Open two separate terminals. You will need one terminal for the server and two for the clients.
+**2. Start clients (Terminals 2 & 3):**
+```bash
+# Default (localhost:9001)
+./build/client/chat_client
 
-    *   **Terminal 1 (Server):** Run the compiled server.
-        ```bash
-        ./build/Chat
-        ```
-    *   **Terminal 2 (Client 1):** Connect to the server using `telnet` or `nc`.
-        ```bash
-        telnet 127.0.0.1 9001
-        # or
-        nc 127.0.0.1 9001
-        ```
-    *   **Terminal 3 (Client 2):** Connect to the server using `telnet` or `nc`.
-        ```bash
-        telnet 127.0.0.1 9001
-        # or
-        nc 127.0.0.1 9001
-        ```
+# Custom IP and port
+./build/client/chat_client 192.168.1.5 9001
+```
 
-3.  **Enter your name:**
-    When prompted by the server after connecting, each client should enter a unique username.
+**3. Chat!** Enter your name when prompted, then start messaging.
 
-4.  **Chat:**
-    Once both clients are connected and have provided their names, messages sent by one client will be delivered to the other, prefixed with the sender's username.
+## Project Structure
 
-## How it Works
+```
+├── src/
+│   ├── common/    # Shared socket utilities
+│   ├── server/    # Server implementation
+│   └── client/    # Client application
+├── include/       # Header files
+└── build/         # Compiled binaries
+```
 
-The server utilizes TCP sockets and the `select()` system call to efficiently manage real-time communication between two connected clients. After clients identify themselves with usernames, the server relays messages between them.
+## Requirements
+
+- GCC
+- Make
+- Linux/macOS (uses POSIX sockets)
+
+---
+
+Enjoy chatting!
+```
