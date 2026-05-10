@@ -1,4 +1,3 @@
-```markdown
 # C Chat Server
 
 A simple two-person chat application in C using TCP sockets. Built as a learning project for C programming and network sockets.
